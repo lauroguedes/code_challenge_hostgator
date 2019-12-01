@@ -1,0 +1,23 @@
+@import './variables';
+@import './gridsystem';
+
+//General
+body {
+  margin: 0;
+  font-size: 16px;
+  background: scale-color($primary-color, $lightness: 95%);
+}
+#app {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $black-gray-color;
+}
+
+//Utilities
+.text-center {
+  text-align: center;
+}
+.primary-color-light {
+  color: scale-color($color: $primary-color, $lightness: 50%);
+}

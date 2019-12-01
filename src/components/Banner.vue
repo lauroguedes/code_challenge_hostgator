@@ -43,10 +43,10 @@ export default {
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url(../assets/bg-black-friday-mod.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-image: url(../assets/bg-feature.svg);
+            //background-position: center;
+            //background-repeat: no-repeat;
+            //background-size: cover;
             z-index: -3;
         }
         .container {
@@ -60,12 +60,17 @@ export default {
         top: calc(50% - 15px);
         left: 0;
         transform: translateY(-50%);
+        color: white;
         .title,
         .options-text {
             display: inline-block;
             width: 60%;
         }
+        .mini-title {
+            color: lighten($primary-color, 50%);
+        }
         .options-text span {
+            color: lighten($primary-color, 50%);
             margin-right: .8rem;
             &.last-child {
                 margin-right: 0
