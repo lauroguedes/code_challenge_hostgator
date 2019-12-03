@@ -5,7 +5,7 @@
             <div class="text">Quero pagar a cada:</div>
             <ul class="options">
                 <li v-for="o in options" :key="o.id" :class="{active: o.key === optionSelected.key}">
-                    <input type="radio" :id="o.key" :value="o" v-model="optionSelected">
+                    <input type="radio" @change="sendCycleParent" :id="o.key" :value="o" v-model="optionSelected">
                     <label :for="o.key">{{ o.name }}</label>
                 </li>
             </ul>
@@ -33,14 +33,17 @@ export default {
                 }
             ],
             optionSelected: {
-                key: '3-year',
+                key: 'triennially',
                 name: '3 anos'
             }
         }
     },
+    mounted() {
+        this.$emit('option-cycle', {cycle: this.optionSelected.key})
+    },
     methods: {
-        checkOption() {
-
+        sendCycleParent() {
+            this.$emit('option-cycle', {cycle: this.optionSelected.key})
         }
     }
 }

@@ -16,7 +16,7 @@
                   <span class="primary-color-light">/mes</span>
               </div>
               <div class="button-action">
-                  <a href="#" :class="['btn', p.name == 'Plano M' ? 'btn-secondary' : 'btn-primary']">Contrate Agora</a>
+                  <a target="_blank" :href="generateUrlContractNow(p)" :class="['btn', p.name == 'Plano M' ? 'btn-secondary' : 'btn-primary']">Contrate Agora</a>
               </div>
               <div class="price-three">
                     <p>
@@ -43,6 +43,10 @@
 import axios from 'axios'
 
 export default {
+    props: {
+        cycle: String,
+        promoCode: String
+    },
     data() {
         return {
             plans: []
@@ -55,20 +59,29 @@ export default {
     },
     methods: {
         price(plan) {
-            return plan.cycle['triennially'].priceOrder
+            return plan.cycle[this.cycle].priceOrder
         },
         priceDiscount(plan) {
-            let price = plan.cycle['triennially'].priceOrder
+            let price = plan.cycle[this.cycle].priceOrder
             return price * 0.4;
         },
         priceCycle(plan) {
             let discount = this.priceDiscount(plan);
-            return discount/plan.cycle['triennially'].months;
+            return discount/plan.cycle[this.cycle].months;
         },
         priceDifference(plan) {
             let value = this.price(plan);
             let valueDiscount = this.priceDiscount(plan);
             return value - valueDiscount;
+        },
+        generateUrlContractNow(plan) {
+            let params = {
+                a: 'add',
+                pid: plan.id,
+                billingcycle: this.cycle,
+                promocode: this.promoCode
+            }
+            return '?' + Object.keys(params).map(key => key + '=' + params[key]).join('&');
         }
     }
 }
