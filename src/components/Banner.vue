@@ -28,6 +28,12 @@ export default {
                 'Painel de controle cPanel'
             ]
         }
+    },
+    mounted() {
+        let browser = window.navigator.userAgent;
+        if (browser.indexOf("Trident") > 0) {
+            $("#banner:before").css({"background-image":"url(../assets/bg-wave.svg) no-repeat", "background-size":"100%"});
+        }
     }
 }
 </script>
@@ -44,9 +50,6 @@ export default {
             width: 100%;
             height: 100%;
             background-image: url(../assets/bg-feature.svg);
-            //background-position: center;
-            //background-repeat: no-repeat;
-            //background-size: cover;
             z-index: -3;
         }
         .container {
@@ -76,5 +79,9 @@ export default {
                 margin-right: 0
             }
         }
+    }
+    //hack IE9 background
+    #banner:before { 
+        background: #1D5297\0; 
     }
 </style>

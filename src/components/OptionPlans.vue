@@ -1,48 +1,63 @@
 <template>
   <div class="row">
-      <div v-for="p in plans" :key="p.id" :class="['col-4 plans', p.name == 'Plano M' ? 'plan-m' : '']">
-          <div class="option-plan-header">
-              <div class="icon"></div>
-              <h2>{{ p.name }}</h2>
-          </div>
-          <div class="option-plan-body">
-              <div class="price-one">
-                  <del>{{ price(p) | currency }}</del> <strong>{{ priceDiscount(p) | currency }}</strong>
-                  <div>equivalente a</div>
-              </div>
-              <div class="price-two">
-                  <span class="primary-color-light">R$</span>
-                  <span class="text-xl">{{ priceCycle(p) | currency('') }}</span>
-                  <span class="primary-color-light">/mes</span>
-              </div>
-              <div class="button-action">
-                  <a target="_blank" :href="generateUrlContractNow(p)" :class="['btn', p.name == 'Plano M' ? 'btn-secondary' : 'btn-primary']">Contrate Agora</a>
-              </div>
-              <div class="price-three">
-                    <p>
-                        <strong>1 ano de Dominio grátis <i class="fas fa-info-circle primary-color-light"></i></strong>
-                    </p>
-                  <span class="primary-color-light">Economize {{ priceDifference(p) | currency }}</span>
-                  <span class="badge-green">40% OFF</span>
-              </div>
-          </div>
-          <div class="option-plan-features">
-              <ul>
-                  <li><span class="outline">Para 1 site</span></li>
-                  <li><strong>100 GB</strong> de armazenamento</li>
-                  <li><span class="outline">Contas de e-mail</span> <strong>Ilimitadas</strong></li>
-                  <li>Criador de sites <strong>Grátis</strong></li>
-                  <li>Certificado SSL <strong>Grátis</strong> (https)</li>
-              </ul>
-          </div>
-      </div>
+      <carousel 
+        :navigationEnabled="true" 
+        :perPage="3" 
+        :perPageCustom="[[320, 1], [768, 2], [970, 3]]"
+        :minSwipeDistance="100"
+        navigationNextLabel="<i class='fas fa-arrow-circle-right'></i>"
+        navigationPrevLabel="<i class='fas fa-arrow-circle-left'></i>">
+          <slide v-for="p in plans" :key="p.id">  
+            <div :class="['col-12 plans', p.name == 'Plano M' ? 'plan-m' : '']">
+                <div class="option-plan-header">
+                    <div class="icon"></div>
+                    <h2>{{ p.name }}</h2>
+                </div>
+                <div class="option-plan-body">
+                    <div class="price-one">
+                        <del>{{ price(p) | currency }}</del> <strong>{{ priceDiscount(p) | currency }}</strong>
+                        <div>equivalente a</div>
+                    </div>
+                    <div class="price-two">
+                        <span class="primary-color-light">R$</span>
+                        <span class="text-xl">{{ priceCycle(p) | currency('') }}</span>
+                        <span class="primary-color-light">/mes</span>
+                    </div>
+                    <div class="button-action">
+                        <a target="_blank" :href="generateUrlContractNow(p)" :class="['btn', p.name == 'Plano M' ? 'btn-secondary' : 'btn-primary']">Contrate Agora</a>
+                    </div>
+                    <div class="price-three">
+                            <p>
+                                <strong>1 ano de Dominio grátis <i class="fas fa-info-circle primary-color-light"></i></strong>
+                            </p>
+                        <span class="primary-color-light">Economize {{ priceDifference(p) | currency }}</span>
+                        <span class="badge-green">40% OFF</span>
+                    </div>
+                </div>
+                <div class="option-plan-features">
+                    <ul>
+                        <li><span class="outline">Para 1 site</span></li>
+                        <li><strong>100 GB</strong> de armazenamento</li>
+                        <li><span class="outline">Contas de e-mail</span> <strong>Ilimitadas</strong></li>
+                        <li>Criador de sites <strong>Grátis</strong></li>
+                        <li>Certificado SSL <strong>Grátis</strong> (https)</li>
+                    </ul>
+                </div>
+            </div>
+          </slide>
+      </carousel>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { Carousel, Slide } from 'vue-carousel';
 
 export default {
+    components: {
+        Carousel,
+        Slide
+    },
     props: {
         cycle: String,
         promoCode: String
@@ -88,6 +103,21 @@ export default {
 </script>
 
 <style lang="scss">
+    .VueCarousel-slide {
+        margin-right: 2rem;
+    }
+    .fa-arrow-circle-right,
+    .fa-arrow-circle-left {
+        position: relative;
+        font-size: 2rem;
+        color: $primary-color;
+    }
+    .fa-arrow-circle-right {
+        right: 2rem;
+    }
+    .fa-arrow-circle-left {
+        left: 2rem;
+    }
     .plans {
         background: white;
         border-radius: .3rem;

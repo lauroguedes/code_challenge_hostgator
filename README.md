@@ -1,4 +1,6 @@
-# code_challenge_hostgator
+# Code Challenge for Hostgator
+
+![Demo](demo.gif)
 
 ## Project setup
 ```
@@ -14,11 +16,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
